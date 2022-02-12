@@ -2,6 +2,7 @@
 #include "SNN_class.h"
 #include "STDP.h"
 #include "gradient.h"
+#include "Layer.h"
 
 using namespace std;
 

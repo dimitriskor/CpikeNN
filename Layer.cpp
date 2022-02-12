@@ -1,4 +1,6 @@
 #include "neuron.h"
+#include "Layer.h"
+
 
 using namespace std;
 

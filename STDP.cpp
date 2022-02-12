@@ -1,6 +1,7 @@
 #include "neuron.h"
 #include "STDP.h"
 #include "SNN_class.h"
+#include "Layer.h"
 
 using namespace std;
 

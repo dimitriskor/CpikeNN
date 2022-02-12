@@ -8,6 +8,7 @@
 #include "SNN_class.h"
 #include "STDP.h"
 #include "WFSP.h"
+#include "Layer.h"
 
 using namespace std;
 

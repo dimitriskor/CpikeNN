@@ -8,6 +8,7 @@
 #include "gradient.h"
 #include "neuron.h"
 #include "WFSP.h"
+#include "Layer.h"
 
 using namespace std;
 

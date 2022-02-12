@@ -7,6 +7,7 @@
 #include <time.h>
 #include <vector>
 #include <unistd.h>
+#include "Layer.h"
 #include "neuron.h"
 
 using namespace std;

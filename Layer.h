@@ -1,5 +1,5 @@
-#ifndef NEURON_H
-#define NEURON_H
+#ifndef LAYER_H
+#define LAYER_H
 
 #include <iostream>
 #include <math.h>

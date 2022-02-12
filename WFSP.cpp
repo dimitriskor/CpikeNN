@@ -1,6 +1,7 @@
 #include "WFSP.h"
 #include "SNN_class.h"
 #include "neuron.h"
+#include "Layer.h"
 
 using namespace std;
 

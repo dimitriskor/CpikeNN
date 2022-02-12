@@ -1,6 +1,7 @@
 #include "neuron.h"
 #include "gradient.h"
 #include "SNN_class.h"
+#include "Layer.h"
 
 using namespace std;
 
@@ -10,12 +11,12 @@ vector<vector<double>> matrix_mul(vector<vector<double>> A, vector<vector<double
     int A_y = A[0].size();
     int B_x = B.size();
     int B_y = B[0].size();
-/*   
+/*
  *  if (A_y != B_x)
  *      return A;
-*/         
+*/
     vector<vector<double>> C;
-    
+
     for (int i = 0; i < A_x; i++){
         vector<double> temp;
         for (int j = 0; j < B_y; j++){
@@ -26,15 +27,15 @@ vector<vector<double>> matrix_mul(vector<vector<double>> A, vector<vector<double
         }
         C.push_back(temp);
     }
-    
+
     return C;
 }
 
 
 vector<vector<vector<double>>> partial_mult(vector<vector<vector<double>>> weights){
-    
+
     vector<vector<vector<double>>> ret;
-    
+
     vector<vector<double>> I_m;
     for (int i = 0; i < weights[0].size(); i++){
         vector<double> temp;
@@ -46,28 +47,28 @@ vector<vector<vector<double>>> partial_mult(vector<vector<vector<double>>> weigh
         }
         I_m.push_back(temp);
     }
-    
+
     ret.push_back(I_m);
     ret.push_back(weights[0]);
-    
+
     for (int i = 0; i < weights.size() - 2; i++){
         vector<vector<double>> temp = ret[ret.size()-1];
         vector<vector<double>> to_add = matrix_mul(temp, weights[i]);
         ret.push_back(to_add);
     }
-    
+
     ret.push_back(weights[weights.size()-1]);
-    
+
     for (int i = weights.size() - 2; i > 0; i--){
         vector<vector<double>> temp = ret[ret.size()-1];
         vector<vector<double>> to_add = matrix_mul(weights[i], temp);
         ret.push_back(to_add);
     }
-    
+
     return ret;
 }
-    
-    
+
+
 vector<vector<double>> grad_calc(vector<vector<double>> left, vector<vector<double>> right, pair<int,int> coord){
     double multiplier = right[coord.second][0];
     vector<vector<double>> ret;
@@ -81,10 +82,10 @@ vector<vector<double>> grad_calc(vector<vector<double>> left, vector<vector<doub
 
 
 vector<double> grad (vector<vector<vector<double>>> weights, vector<int> loss, vector<int> input){
-    
+
     vector<vector<vector<double>>> sub_weights = partial_mult(weights);
     vector<double> ret;
-    
+
     for (int i = 0; i < weights.size(); i++){
          for (int j = 0; j < weights[i].size(); j++){
              for (int k = 0; k < weights[i][j].size(); k++){
@@ -105,7 +106,7 @@ vector<double> grad (vector<vector<vector<double>>> weights, vector<int> loss, v
     }
     return ret;
 }
-        
+
 
 
 Adam::Adam(){
@@ -133,7 +134,7 @@ Adam::Adam(vector<vector<vector<double>>> *weights, double learning_rate, double
         u.push_back(0.0);
     }
 }
-    
+
 
 
 void Adam::Adam_loop (vector<int> loss_vec, double loss, vector<int> input, int time){
@@ -161,7 +162,3 @@ void Adam::Adam_loop (vector<int> loss_vec, double loss, vector<int> input, int 
         }
     }
 }
-
-
-
-
