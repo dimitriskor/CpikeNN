@@ -1,7 +1,7 @@
 GCC=g++
 
-exe: test.o gradient.o neuron.o SNN_class.o STDP.o WFSP.o
-	$(GCC) test.o gradient.o neuron.o SNN_class.o STDP.o WFSP.o -o exe
+exe: test.o gradient.o neuron.o SNN_class.o STDP.o WFSP.o Layer.o
+	$(GCC) test.o gradient.o neuron.o SNN_class.o STDP.o WFSP.o Layer.o -o exe
 
 test.o: test.cpp gradient.h neuron.h SNN_class.h STDP.h WFSP.h
 	$(GCC) -c test.cpp
@@ -20,6 +20,9 @@ STDP.o: STDP.cpp STDP.h neuron.h SNN_class.h
 
 WFSP.o: WFSP.cpp WFSP.h neuron.h SNN_class.h
 	$(GCC) -c WFSP.cpp
+
+Layer.o: Layer.cpp Layer.h neuron.h
+	$(GCC) -c Layer.cpp
 
 clear:
 	rm *.o exe
